@@ -34,30 +34,3 @@
       border-radius: 8px;
       color: white;
       cursor: pointer;
-    }
-    button:hover {
-      background: #e91e63;
-    }
-    audio {
-      margin-top: 20px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>AI Funtime</h1>
-    <p>Start a fantasy call with your AI companion.</p>
-    <button onclick="startCall()">Start Call</button>
-    <audio id="voiceAudio" controls hidden></audio>
-  </div>
-
-  <script>
-    function startCall() {
-      const audio = document.getElementById('voiceAudio');
-      audio.src = 'https://voice-clips.s3.amazonaws.com/funtime-demo-voice.mp3'; // Real AI voice
-      audio.hidden = false;
-      audio.play();
-    }
-  </script>
-</body>
-</html>
