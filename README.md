@@ -1,6 +1,7 @@
 # aifuntime
 I-driven fantasy voice experience
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,4 +27,31 @@ I-driven fantasy voice experience
       padding: 10px 20px;
       font-size: 18px;
       background-color: #e91e63;
-      border: none
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #d81b60;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>AI Funtime</h1>
+    <p>Welcome to your AI fantasy voice experience.</p>
+    <button onclick="startCall()">Start Voice Call</button>
+    <audio id="voiceAudio" controls hidden></audio>
+  </div>
+  <script>
+    function startCall() {
+      const audio = document.getElementById('voiceAudio');
+      audio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+      audio.hidden = false;
+      audio.play();
+    }
+  </script>
+</body>
+</html>
+
