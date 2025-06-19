@@ -40,6 +40,7 @@
     }
     audio {
       margin-top: 20px;
+      width: 100%;
     }
   </style>
 </head>
@@ -54,9 +55,12 @@
   <script>
     function startCall() {
       const audio = document.getElementById('voiceAudio');
-      audio.src = 'https://voice-clips.s3.amazonaws.com/funtime-demo-voice.mp3'; // Real AI voice
+      audio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'; // guaranteed working mp3
       audio.hidden = false;
-      audio.play();
+      audio.play().catch(err => {
+        alert("Autoplay blocked. Tap the play button.");
+        console.log(err);
+      });
     }
   </script>
 </body>
