@@ -1,36 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Funtime</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #0e0e0e;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+<!DOCTYPE html><html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Funtime</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to bottom right, #1c1c2b, #2a2a3d);
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      h1 {
+        margin-bottom: 10px;
+        font-size: 2.5rem;
+      }
+      .selector {
+        margin: 20px 0;
+      }
+      select, button {
+        padding: 10px 15px;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+      }
+      button {
+        background-color: #ff4f81;
+        color: white;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      button:hover {
+        background-color: #e73e6a;
+      }
+      audio {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to AI Funtime</h1>
+    <div class="selector">
+      <label for="voiceMode">Choose your vibe:</label>
+      <select id="voiceMode">
+        <option value="flirty">Flirty</option>
+        <option value="dirty">Dirty</option>
+        <option value="goddess">Goddess</option>
+      </select>
+    </div>
+    <button onclick="startCall()">Start Call</button>
+    <audio id="aiVoice" controls style="display: none;"></audio><script>
+  const audio = document.getElementById('aiVoice');
+
+  function startCall() {
+    const mode = document.getElementById('voiceMode').value;
+    let audioSrc = '';
+
+    switch (mode) {
+      case 'flirty':
+        audioSrc = 'https://aifuntime-demo.vercel.app/audio/flirty.mp3';
+        break;
+      case 'dirty':
+        audioSrc = 'https://aifuntime-demo.vercel.app/audio/dirty.mp3';
+        break;
+      case 'goddess':
+        audioSrc = 'https://aifuntime-demo.vercel.app/audio/goddess.mp3';
+        break;
     }
-    .container {
-      background: #1c1c1c;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 0 12px rgba(255, 0, 100, 0.3);
-      text-align: center;
-    }
-    h1 {
-      color: #ff4081;
-      margin-bottom: 20px;
-    }
-    button {
-      padding: 15px 25px;
-      font-size: 18px;
-      background: #ff4081;
-      border: none;
-      border-radius: 8px;
-      color: white;
-      cursor: pointer;
+
+    audio.src = audioSrc;
+    audio.style.display = 'block';
+    audio.play();
+  }
+</script>
+
+  </body>
+</html>
