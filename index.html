@@ -3,71 +3,203 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Funtime</title>
+  <title>AI Funtime | Upgraded</title>
   <style>
+    /* Using CSS Variables for easier theme management */
+    :root {
+      --primary-bg: #1c1c2b;
+      --secondary-bg: #2a2a3d;
+      --accent-color: #ff4f81;
+      --accent-hover: #e73e6a;
+      --text-color: #f0f0f0;
+      --active-color: #5dffb3;
+    }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom right, #1c1c2b, #2a2a3d);
-      color: #fff;
+      background: linear-gradient(to bottom right, var(--primary-bg), var(--secondary-bg));
+      color: var(--text-color);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
+      text-align: center;
     }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
     h1 {
-      margin-bottom: 10px;
+      margin-top: 0;
+      margin-bottom: 15px;
       font-size: 2.5rem;
     }
-    .selector {
-      margin: 20px 0;
+
+    p {
+      margin-bottom: 30px;
+      color: #b0b0c0;
     }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
     select, button {
-      padding: 10px 15px;
       font-size: 1rem;
       border-radius: 8px;
       border: none;
       outline: none;
+      padding: 12px 20px;
+      width: 250px;
+      box-sizing: border-box; /* Ensures padding doesn't affect width */
     }
+
+    select {
+      background-color: var(--secondary-bg);
+      color: var(--text-color);
+      cursor: pointer;
+    }
+
     button {
-      background-color: #ff4f81;
+      background-color: var(--accent-color);
       color: white;
       cursor: pointer;
-      transition: background 0.2s;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.1s ease;
     }
+
     button:hover {
-      background-color: #e73e6a;
+      background-color: var(--accent-hover);
     }
-    audio {
-      margin-top: 20px;
+    
+    button:active {
+      transform: scale(0.98);
+    }
+    
+    /* Style for when the call is active */
+    button.active {
+        background-color: var(--active-color);
+        color: var(--primary-bg);
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to AI Funtime</h1>
-  <div class="selector">
-    <label for="voiceMode">Choose your vibe:</label>
-    <select id="voiceMode">
-      <option value="flirty">Flirty</option>
-    </select>
+
+  <div class="container">
+    <h1>Welcome to AI Funtime</h1>
+    <p>Select a voice persona and start the call.</p>
+    
+    <div class="controls">
+      <select id="voiceModeSelect"></select>
+      <button id="callButton">Start Call</button>
+    </div>
   </div>
-  <button onclick="startCall()">Start Call</button>
-  <audio id="aiVoice" controls style="display: none;"></audio>
+  
+  <audio id="aiVoice"></audio>
 
   <script>
-    const audio = document.getElementById('aiVoice');
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- DOM Elements ---
+      const voiceSelect = document.getElementById('voiceModeSelect');
+      const callButton = document.getElementById('callButton');
+      const audioPlayer = document.getElementById('aiVoice');
+      
+      // --- State ---
+      let isCallActive = false;
 
-    const voices = {
-      flirty: "data:audio/mp3;base64,//uQxAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAACcQCA... (shortened)"
-    };
+      // --- Audio Data ---
+      // This structure is easily expandable. Just add a new entry.
+      // NOTE: The flirty audio is from your original code. The others are placeholders (short beeps).
+      // You can generate your own Base64 audio online and replace them.
+      const voices = {
+        flirty: {
+          displayName: "Flirty",
+          audioSrc: "data:audio/mp3;base64,//uQxAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAACcQCA... (shortened)"
+        },
+        friendly: {
+          displayName: "Friendly",
+          audioSrc: "data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU2LjM2LjEwMAAAAAP/8B6AAAAAAAAA..." // Placeholder
+        },
+        mysterious: {
+          displayName: "Mysterious",
+          audioSrc: "data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU2LjM2LjEwMAAAAAAAAAAAAAP/8B6AAA..." // Placeholder
+        }
+      };
 
-    function startCall() {
-      const mode = document.getElementById('voiceMode').value;
-      audio.src = voices[mode];
-      audio.style.display = 'block';
-      audio.play();
-    }
+      // --- Functions ---
+
+      // Dynamically populates the dropdown from the 'voices' object
+      function populateVoiceOptions() {
+        for (const key in voices) {
+          const option = document.createElement('option');
+          option.value = key;
+          option.textContent = voices[key].displayName;
+          voiceSelect.appendChild(option);
+        }
+      }
+
+      // Toggles the call state (start/end)
+      function toggleCall() {
+        if (isCallActive) {
+          endCall();
+        } else {
+          startCall();
+        }
+      }
+      
+      // Starts the audio playback
+      function startCall() {
+        const selectedVoiceKey = voiceSelect.value;
+        audioPlayer.src = voices[selectedVoiceKey].audioSrc;
+        audioPlayer.play();
+        
+        isCallActive = true;
+        updateUI();
+      }
+
+      // Ends the audio playback
+      function endCall() {
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0; // Rewind the audio
+        
+        isCallActive = false;
+        updateUI();
+      }
+
+      // Updates the button text and style based on the call state
+      function updateUI() {
+        if (isCallActive) {
+          callButton.textContent = 'End Call';
+          callButton.classList.add('active');
+          voiceSelect.disabled = true; // Disable dropdown during call
+        } else {
+          callButton.textContent = 'Start Call';
+          callButton.classList.remove('active');
+          voiceSelect.disabled = false; // Re-enable dropdown
+        }
+      }
+
+      // --- Event Listeners ---
+      
+      // Listen for the button click
+      callButton.addEventListener('click', toggleCall);
+      
+      // When the audio finishes playing naturally, end the call
+      audioPlayer.addEventListener('ended', endCall);
+
+      // --- Initial Setup ---
+      populateVoiceOptions();
+    });
   </script>
 </body>
 </html>
