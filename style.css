@@ -1,0 +1,15 @@
+body {
+  font-family: Georgia, serif;
+  padding: 20px;
+  background: #fff;
+  color: #111;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+label, select, button {
+  margin: 10px 0;
+  display: block;
+}
