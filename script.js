@@ -13,3 +13,5 @@ document.getElementById('start').addEventListener('click', async () => {
     alert('Something went wrong!');
   }
 });
+<script src="js/main.js"></script>
+</body>
