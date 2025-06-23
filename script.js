@@ -12,6 +12,20 @@ document.getElementById('start').addEventListener('click', async () => {
     console.error('Error:', e);
     alert('Something went wrong!');
   }
+  document.getElementById("start-call").addEventListener("click", async () => {
+  const vibe = document.getElementById("vibe").value;
+  const response = await fetch(`/api/start-call?vibe=${vibe}`);
+
+  if (!response.ok) {
+    alert("Failed to start call");
+    return;
+  }
+
+  const { audioUrl } = await response.json();
+  const audioPlayer = document.getElementById("audio-player");
+  audioPlayer.src = audioUrl;
+  audioPlayer.play();
+});
 });
 <script src="js/main.js"></script>
 </body>
