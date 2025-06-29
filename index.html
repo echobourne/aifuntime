@@ -1,31 +1,29 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Funtime - Voice Call Demo</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>AI Funtime</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app">
-    <h1>🎧 AI Funtime</h1>
-    <p>Choose your perfect AI voice companion and start your call.</p><div class="options">
-  <label>
-    Voice Type:
-    <select id="voiceSelect">
-      <option value="soft">Soft & Caring</option>
-      <option value="seductive">Seductive</option>
-      <option value="dominant">Dominant</option>
-    </select>
-  </label>
+    <div class="container">
+        <h1>AI Funtime</h1>
+        <p class="subheading">Custom AI Voice Companion, Just the Way You Like It</p>
+        
+        <div class="selector">
+            <label for="personality">Choose Personality:</label>
+            <select id="personality">
+                <option value="fun">Flirty & Fun</option>
+                <option value="naughty">Naughty & Bold</option>
+                <option value="gentle">Gentle & Sweet</option>
+            </select>
+        </div>
 
-  <label>
-    Dirtiness Level:
-    <input type="range" id="dirtiness" min="0" max="10" value="5">
-  </label>
-</div>
+        <button id="startCall">Start Call</button>
+        
+        <p id="status">Ready when you are.</p>
+    </div>
 
-<button id="startCall">Start AI Call</button>
-<audio id="audioPlayer" controls style="display: none;"></audio>
-
-  </div>  <script src="script.js"></script></body>
+    <script src="script.js"></script>
+</body>
 </html>
