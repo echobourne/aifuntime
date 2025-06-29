@@ -1,15 +1,24 @@
 const startCallBtn = document.getElementById('startCall');
 const statusText = document.getElementById('status');
-const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); // Temporary placeholder audio
+const personalitySelect = document.getElementById('personality');
+
+// Example personality audio files (replace with AI calls later)
+const audioSamples = {
+    fun: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    naughty: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+    gentle: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
+};
 
 startCallBtn.addEventListener('click', () => {
+    const selectedPersonality = personalitySelect.value;
+    const audio = new Audio(audioSamples[selectedPersonality]);
+
     statusText.textContent = "Connecting to AI Funtime...";
-    
-    // Simulate short delay for 'connection'
+
     setTimeout(() => {
         audio.play()
             .then(() => {
-                statusText.textContent = "You're live with AI Funtime 😉";
+                statusText.textContent = `You're live with the ${selectedPersonality} AI!`;
             })
             .catch(err => {
                 console.error(err);
