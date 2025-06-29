@@ -2,26 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AI Funtime</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Funtime - Level 2</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>AI Funtime</h1>
-        <p class="subheading">Custom AI Voice Companion, Just the Way You Like It</p>
-        
-        <div class="selector">
-            <label for="personality">Choose Personality:</label>
-            <select id="personality">
-                <option value="fun">Flirty & Fun</option>
-                <option value="naughty">Naughty & Bold</option>
-                <option value="gentle">Gentle & Sweet</option>
-            </select>
+        <p>Your customizable AI voice companion experience.</p>
+
+        <div class="call-box">
+            <button id="startCall">Start AI Call</button>
+            <p id="status">Ready to connect...</p>
         </div>
 
-        <button id="startCall">Start Call</button>
-        
-        <p id="status">Ready when you are.</p>
+        <audio id="audioPlayer" src="sample.mp3"></audio>
     </div>
 
     <script src="script.js"></script>
