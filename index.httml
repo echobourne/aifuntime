@@ -1,0 +1,19 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Funtime</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>AI Funtime Voice Call Demo</h1>
+    <p>Click below to start your AI voice call experience:</p>
+    <button id="callBtn">Start Call</button>
+    <audio id="audioPlayer" src="audio/sample.mp3"></audio>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
